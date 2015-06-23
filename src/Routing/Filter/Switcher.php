@@ -6,7 +6,7 @@
  *
  */
 
-namespace SwitchTestDatasource\Routing\Filter;
+namespace TestDatasourceSwitcher\Routing\Filter;
 
 use Cake\Event\Event;
 use Cake\Network\Request;
@@ -20,7 +20,7 @@ use Cake\Datasource\ConnectionManager;
  * debug >= 1 で稼働
  * Cookieを判別に使用します。デフォルト: __cakephp_test_connection
  *
- * use SwitchTestDatasource\Routing\Filter\Switcher;
+ * use TestDatasourceSwitcher\Routing\Filter\Switcher;
  * DispatcherFactory::add(new Switcher(['priority' => 1]));
  */
 class Switcher extends DispatcherFilter

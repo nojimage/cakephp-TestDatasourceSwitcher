@@ -1,6 +1,6 @@
 {
-    "name": "your-name-here/SwitchTestDatasource",
-    "description": "SwitchTestDatasource plugin for CakePHP",
+    "name": "nojimage/cakephp-test-datasource-switcher",
+    "description": "TestDatasourceSwitcher plugin for CakePHP 3",
     "type": "cakephp-plugin",
     "require": {
         "php": ">=5.4.16",
@@ -11,12 +11,12 @@
     },
     "autoload": {
         "psr-4": {
-            "SwitchTestDatasource\\": "src"
+            "TestDatasourceSwitcher\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "SwitchTestDatasource\\Test\\": "tests",
+            "TestDatasourceSwitcher\\Test\\": "tests",
             "Cake\\Test\\": "./vendor/cakephp/cakephp/tests"
         }
     }
