@@ -1,9 +1,14 @@
 <?php
 
 /**
+ * Copyright (c) 2015 ELASTIC Consultants Inc. (https://elasticconsultants.com/)
  *
- * Copyright 2015 ELASTIC Consultants Inc.
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
+ * Redistributions of files must retain the above copyright notice.
  *
+ * @copyright (c) 2015, ELASTIC Consultatnts Inc. (https://elasticconsultants.com/)
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
 namespace TestDatasourceSwitcher\Routing\Filter;
@@ -20,8 +25,8 @@ use Cake\Datasource\ConnectionManager;
  * debug >= 1 で稼働
  * Cookieを判別に使用します。デフォルト: __cakephp_test_connection
  *
- * use TestDatasourceSwitcher\Routing\Filter\Switcher;
- * DispatcherFactory::add(new Switcher(['priority' => 1]));
+ *     use TestDatasourceSwitcher\Routing\Filter\Switcher;
+ *     DispatcherFactory::add(new Switcher(['priority' => 1]));
  */
 class Switcher extends DispatcherFilter
 {
