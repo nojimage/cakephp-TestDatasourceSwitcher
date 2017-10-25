@@ -1,17 +1,9 @@
 <?php
 
+use Cake\Core\Plugin;
+
 /**
- * Copyright (c) 2015 ELASTIC Consultants Inc. (https://elasticconsultants.com/)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright (c) 2015, ELASTIC Consultatnts Inc. (https://elasticconsultants.com/)
- * @license   http://www.opensource.org/licenses/mit-license.php MIT License
- */
-/**
- * Test suite bootstrap for TestDatasourceSwitcher.
+ * Test suite bootstrap for Test Datasource Switcher.
  *
  * This function is used to find the location of CakePHP whether CakePHP
  * has been installed as a dependency of the plugin, or the plugin is itself
@@ -32,4 +24,9 @@ $root = $findRoot(__FILE__);
 unset($findRoot);
 
 chdir($root);
-require $root . '/config/bootstrap.php';
+if (file_exists($root . '/config/bootstrap.php')) {
+    require $root . '/config/bootstrap.php';
+} else {
+    require $root . '/vendor/cakephp/cakephp/tests/bootstrap.php';
+    Plugin::load('RememberMe', ['path' => dirname(dirname(__FILE__)) . DS]);
+}
