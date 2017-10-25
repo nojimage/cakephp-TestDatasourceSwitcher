@@ -12,11 +12,34 @@ The recommended way to install composer packages is:
 composer require --dev nojimage/cakephp-test-datasource-switcher
 ```
 
-in `config/bootstrap.php`
+CakePHP >= 3.3 in `src/Application.php`
+
+```
+    public function middleware($middlewareQueue)
+    {
+        $middlewareQueue
+            // Catch any exceptions in the lower layers,
+            // and make an error page/response
+            ->add(ErrorHandlerMiddleware::class)
+
+            // vvv ADD THIS LINE vvv
+            ->add(new \TestDatasourceSwitcher\Middleware\DatasourceSwitchMiddleware())
+
+            // Handle plugin/theme assets like CakePHP normally does.
+            ->add(AssetMiddleware::class)
+
+            // Add routing middleware.
+            ->add(new RoutingMiddleware($this));
+
+        return $middlewareQueue;
+    }
+```
+
+CakePHP <= 3.2 in `config/bootstrap.php`
 
 ```
 if (Configure::read('debug')) {
-    Plugin::load('TestDatasourceSwitcher', ['bootstrap' => true]);
+    \Cake\Routing\DispatcherFactory::add(new \TestDatasourceSwitcher\Routing\Filter\Switcher(['priority' => 1]));
 }
 ```
 
