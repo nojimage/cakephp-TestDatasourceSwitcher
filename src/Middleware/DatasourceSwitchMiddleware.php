@@ -57,18 +57,16 @@ class DatasourceSwitchMiddleware
      */
     public function __invoke($request, $response, $next)
     {
-        $response = $next($request, $response);
-
         // apply debug only
-        if (!Configure::read('debug')) {
-            return $response;
+        if (Configure::read('debug')) {
+            $token = $request->getCookie($this->config['cookieName']);
+
+            if (!is_null($token) && (empty($this->_config['validToken']) || $this->_config['validToken'] == $token)) {
+                $this->aliasConnections();
+            }
         }
 
-        $token = $request->getCookie($this->config['cookieName']);
-
-        if (!is_null($token) && (empty($this->_config['validToken']) || $this->_config['validToken'] == $token)) {
-            $this->aliasConnections();
-        }
+        $response = $next($request, $response);
 
         return $response;
     }
