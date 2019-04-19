@@ -40,7 +40,7 @@ class DatasourceSwitchMiddleware
     private $_config = [];
 
     /**
-     * @param array|string $config
+     * @param array|string $config ['cookieName' => ..., 'validToken' => ...]
      */
     public function __construct($config = [])
     {
@@ -52,9 +52,9 @@ class DatasourceSwitchMiddleware
     }
 
     /**
-     * @param ServerRequest $request
-     * @param Response $response
-     * @param callback $next
+     * @param ServerRequest $request the Request
+     * @param Response $response the Response
+     * @param callback $next next callback
      * @return Response
      */
     public function __invoke($request, $response, $next)

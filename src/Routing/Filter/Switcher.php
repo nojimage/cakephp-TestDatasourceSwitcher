@@ -13,11 +13,11 @@
 
 namespace TestDatasourceSwitcher\Routing\Filter;
 
+use Cake\Core\Configure;
+use Cake\Datasource\ConnectionManager;
 use Cake\Event\Event;
 use Cake\Network\Request;
 use Cake\Routing\DispatcherFilter;
-use Cake\Core\Configure;
-use Cake\Datasource\ConnectionManager;
 
 /**
  * データソースをtestに切り替える
@@ -30,7 +30,11 @@ use Cake\Datasource\ConnectionManager;
  */
 class Switcher extends DispatcherFilter
 {
-
+    /**
+     * Switcher constructor.
+     *
+     * @param array|string $config ['cookieName' => ..., 'validToken' => ...]
+     */
     public function __construct($config = [])
     {
         $defaults = [
@@ -45,6 +49,10 @@ class Switcher extends DispatcherFilter
         parent::__construct(array_merge($defaults, $config));
     }
 
+    /**
+     * @param Event $event the Event
+     * @return void
+     */
     public function beforeDispatch(Event $event)
     {
         // apply debug only
@@ -57,7 +65,7 @@ class Switcher extends DispatcherFilter
 
         $token = $request->cookie($this->_config['cookieName']);
 
-        if (!is_null($token) && (empty($this->_config['validToken']) || $this->_config['validToken'] == $token)) {
+        if ($token !== null && (empty($this->_config['validToken']) || $this->_config['validToken'] === $token)) {
             $this->_aliasConnections();
         }
     }
@@ -95,5 +103,4 @@ class Switcher extends DispatcherFilter
             ConnectionManager::alias($alias, $connection);
         }
     }
-
 }
