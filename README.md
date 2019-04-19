@@ -1,5 +1,20 @@
 # TestDatasourceSwitcher plugin for CakePHP 3.x
 
+<p align="center">
+    <a href="LICENSE.txt" target="_blank">
+        <img alt="Software License" src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square">
+    </a>
+    <a href="https://travis-ci.org/nojimage/cakephp-TestDatasourceSwitcher" target="_blank">
+        <img alt="Build Status" src="https://img.shields.io/travis/nojimage/cakephp-TestDatasourceSwitcher/master.svg?style=flat-square">
+    </a>
+    <a href="https://codecov.io/gh/nojimage/cakephp-TestDatasourceSwitcher" target="_blank">
+        <img alt="Codecov" src="https://img.shields.io/codecov/c/github/nojimage/cakephp-TestDatasourceSwitcher.svg?style=flat-square">
+    </a>
+    <a href="https://packagist.org/packages/nojimage/cakephp-test-datasource-switcher" target="_blank">
+        <img alt="Latest Stable Version" src="https://img.shields.io/packagist/v/nojimage/cakephp-test-datasource-switcher.svg?style=flat-square">
+    </a>
+</p>
+
 Switching datasouce connections to `test`, when the request have a specific Cookie.
 
 ## Installation
