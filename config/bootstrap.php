@@ -15,9 +15,9 @@
  */
 use Cake\Core\Configure;
 use Cake\Error\Middleware\ErrorHandlerMiddleware;
+use Cake\Event\Event;
 use Cake\Event\EventManager;
 use Cake\Http\MiddlewareQueue;
-use Payjp\Event;
 use TestDatasourceSwitcher\Middleware\DatasourceSwitchMiddleware;
 use TestDatasourceSwitcher\Routing\Filter\Switcher;
 

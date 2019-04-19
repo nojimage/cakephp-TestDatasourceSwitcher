@@ -26,27 +26,29 @@ use Cake\TestSuite\Fixture\FixtureManager;
  */
 class DatasourceSwitchMiddleware
 {
+    /**
+     * @var array
+     */
+    private $_defaultConfig = [
+        'validToken' => null,
+        'cookieName' => '__cakephp_test_connection',
+    ];
 
     /**
      * @var array
      */
-    private $config = [];
+    private $_config = [];
 
     /**
-     * @param array $config
+     * @param array|string $config
      */
     public function __construct($config = [])
     {
-        $defaults = [
-            'validToken' => null,
-            'cookieName' => '__cakephp_test_connection',
-        ];
-
         if (is_string($config)) {
             $config = ['validToken' => $config];
         }
 
-        $this->config = array_merge($defaults, $config);
+        $this->_config = array_merge($this->_defaultConfig, $config);
     }
 
     /**
@@ -59,16 +61,14 @@ class DatasourceSwitchMiddleware
     {
         // apply debug only
         if (Configure::read('debug')) {
-            $token = $request->getCookie($this->config['cookieName']);
+            $token = $request->getCookie($this->_config['cookieName']);
 
-            if (!is_null($token) && (empty($this->_config['validToken']) || $this->_config['validToken'] == $token)) {
+            if ($token !== null && (empty($this->_config['validToken']) || $this->_config['validToken'] === $token)) {
                 $this->aliasConnections();
             }
         }
 
-        $response = $next($request, $response);
-
-        return $response;
+        return $next($request, $response);
     }
 
     /**
