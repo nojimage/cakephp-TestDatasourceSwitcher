@@ -6,7 +6,7 @@
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright (c) 2017, ELASTIC Consultatnts Inc. (https://elasticconsultants.com/)
+ * @copyright (c) 2017, ELASTIC Consultants Inc. (https://elasticconsultants.com/)
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
@@ -15,9 +15,9 @@
  */
 use Cake\Core\Configure;
 use Cake\Error\Middleware\ErrorHandlerMiddleware;
+use Cake\Event\Event;
 use Cake\Event\EventManager;
 use Cake\Http\MiddlewareQueue;
-use Payjp\Event;
 use TestDatasourceSwitcher\Middleware\DatasourceSwitchMiddleware;
 use TestDatasourceSwitcher\Routing\Filter\Switcher;
 

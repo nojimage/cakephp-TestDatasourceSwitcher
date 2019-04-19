@@ -6,7 +6,7 @@
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright (c) 2017, ELASTIC Consultatnts Inc. (https://elasticconsultants.com/)
+ * @copyright (c) 2017, ELASTIC Consultants Inc. (https://elasticconsultants.com/)
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
@@ -26,49 +26,49 @@ use Cake\TestSuite\Fixture\FixtureManager;
  */
 class DatasourceSwitchMiddleware
 {
+    /**
+     * @var array
+     */
+    private $_defaultConfig = [
+        'validToken' => null,
+        'cookieName' => '__cakephp_test_connection',
+    ];
 
     /**
      * @var array
      */
-    private $config = [];
+    private $_config = [];
 
     /**
-     * @param array $config
+     * @param array|string $config ['cookieName' => ..., 'validToken' => ...]
      */
     public function __construct($config = [])
     {
-        $defaults = [
-            'validToken' => null,
-            'cookieName' => '__cakephp_test_connection',
-        ];
-
         if (is_string($config)) {
             $config = ['validToken' => $config];
         }
 
-        $this->config = array_merge($defaults, $config);
+        $this->_config = array_merge($this->_defaultConfig, $config);
     }
 
     /**
-     * @param ServerRequest $request
-     * @param Response $response
-     * @param callback $next
+     * @param ServerRequest $request the Request
+     * @param Response $response the Response
+     * @param callback $next next callback
      * @return Response
      */
     public function __invoke($request, $response, $next)
     {
         // apply debug only
         if (Configure::read('debug')) {
-            $token = $request->getCookie($this->config['cookieName']);
+            $token = $request->getCookie($this->_config['cookieName']);
 
-            if (!is_null($token) && (empty($this->_config['validToken']) || $this->_config['validToken'] == $token)) {
+            if ($token !== null && (empty($this->_config['validToken']) || $this->_config['validToken'] === $token)) {
                 $this->aliasConnections();
             }
         }
 
-        $response = $next($request, $response);
-
-        return $response;
+        return $next($request, $response);
     }
 
     /**
